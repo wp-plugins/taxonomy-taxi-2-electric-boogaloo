@@ -1,4 +1,4 @@
-=== Taxonomy Taxi 2 Electric Boogaloo ===
+=== Taxonomy Taxi Two Electric Boogaloo ===
 Contributors: postpostmodern
 Donate link: http://www.heifer.org/
 Tags: custom taxonomies, taxonomy
