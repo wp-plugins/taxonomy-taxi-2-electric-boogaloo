@@ -3,12 +3,13 @@ Contributors: postpostmodern
 Donate link: http://www.heifer.org/
 Tags: custom taxonomies, taxonomy
 Requires at least: 3.1.3
-Tested up to: 3.2
+Tested up to: 3.2.1
 Stable tag: trunk
+
+Allows browsing all posts of any taxonomy type.
 
 == Description ==
 Allows browsing all posts of any taxonomy type.
-Requires PHP 5.
 
 == Installation ==
 1. Place /taxonomi-taxi-2/ directory in /wp-content/plugins/
