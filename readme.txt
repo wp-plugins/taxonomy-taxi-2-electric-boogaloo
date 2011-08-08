@@ -19,4 +19,4 @@ Requires PHP 5.
 * First release
 
 == Screenshots ==
-1. 
+1. Taxonomies are rad!
