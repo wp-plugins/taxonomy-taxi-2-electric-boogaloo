@@ -7,7 +7,7 @@ Tested up to: 3.2
 Stable tag: trunk
 
 == Description ==
-An awful hack to allow browsing all posts of any taxonomy type.
+Allows browsing all posts of any taxonomy type.
 Requires PHP 5.
 
 == Installation ==
