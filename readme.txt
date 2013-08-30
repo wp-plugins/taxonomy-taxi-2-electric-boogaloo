@@ -3,7 +3,7 @@ Contributors: postpostmodern
 Donate link: http://www.heifer.org/
 Tags: custom taxonomies, taxonomy
 Requires at least: 3.1.3
-Tested up to: 3.2.1
+Tested up to: 3.6
 Stable tag: trunk
 
 Allows browsing all posts of any taxonomy type.
@@ -13,9 +13,13 @@ Allows browsing all posts of any taxonomy type.
 
 == Installation ==
 1. Place /taxonomi-taxi-2/ directory in /wp-content/plugins/
-1. Flush rewrite rules by saving Permalink options or by deleting the `rewrite_rules` setting in your options table. ( next release will do this automatically and support default permalinks )
+1. Rewrite rules should be flushed automatically on activation, save Permalink options, or delete the `rewrite_rules` setting in your options table.
+1. Where you could previously only see posts in one term at a url like http://domain/taxonomy/slug/, you can now see all posts with any term within the taxonomy at http://domain/taxonomy/ and http://domain/taxonomy/page/2/ etc. 
 
 == Changelog ==
+= 0.2 =
+* Updated compatibility for latest WordPress
+
 = 0.1 =
 * First release
 
