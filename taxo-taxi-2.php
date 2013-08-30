@@ -3,7 +3,7 @@
 Plugin Name: Taxonomy Taxi 2 : Electric Boogaloo
 Plugin URI: 
 Description: 
-Version: .2
+Version: .21
 Author: Eric Eaglstun
 Author URI: 
 */
@@ -41,9 +41,10 @@ class TaxoTaxi2ElecBoog{
 	*	@return string	
 	*/
 	public static function parse_query( &$wp_query ){
-		if( isset($wp_query->tax_query->queries[0]) )
+		if( isset($wp_query->tax_query->queries[0]) ){
 			self::$queried_taxonomy = $wp_query->tax_query->queries[0]['taxonomy'];
-			
+		}
+		
 		return $wp_query;
 	}
 	
@@ -106,9 +107,13 @@ class TaxoTaxi2ElecBoog{
 			case 'query':
 				$title = "') OR (taxonomy = '".self::$queried_taxonomy;
 				break;
+
 			case 'save':
 				global $wp_query;
-				$wp_query->queried_object = (object) array( 'slug' => $title, 'taxonomy' => '' );
+				$taxonomy = get_taxonomy( self::$queried_taxonomy );
+				$wp_query->queried_object = (object) array( 'slug' => $title, 
+															'taxonomy' => self::$queried_taxonomy,
+															'name' => $taxonomy->labels->all_items );
 				break;
 		}
 		

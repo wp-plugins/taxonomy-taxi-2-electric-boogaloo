@@ -17,6 +17,9 @@ Allows browsing all posts of any taxonomy type.
 1. Where you could previously only see posts in one term at a url like http://domain/taxonomy/slug/, you can now see all posts with any term within the taxonomy at http://domain/taxonomy/ and http://domain/taxonomy/page/2/ etc. 
 
 == Changelog ==
+= 0.21 =
+* Quick fix for wp_title
+
 = 0.2 =
 * Updated compatibility for latest WordPress
 
