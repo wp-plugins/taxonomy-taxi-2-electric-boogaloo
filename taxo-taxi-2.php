@@ -1,12 +1,4 @@
-<?
-/*
-Plugin Name: Taxonomy Taxi 2 : Electric Boogaloo
-Plugin URI: 
-Description: 
-Version: .21
-Author: Eric Eaglstun
-Author URI: 
-*/
+<?php
 
 class TaxoTaxi2ElecBoog{
 	private static $queried_taxonomy = '';
@@ -18,21 +10,6 @@ class TaxoTaxi2ElecBoog{
 		add_filter( 'parse_query', 'TaxoTaxi2ElecBoog::parse_query' );
 		add_filter( 'rewrite_rules_array', 'TaxoTaxi2ElecBoog::rewrite_rules_array' );
 		add_filter( 'sanitize_title', 'TaxoTaxi2ElecBoog::sanitize_title', 10, 3 );	
-	}
-	
-	/*
-	*	called on activation hook
-	*/
-	public static function activate(){
-		self::setup();
-		flush_rewrite_rules( FALSE );
-	}
-	
-	/*
-	*	called on deactivation hook
-	*/
-	public static function deactivate(){
-		flush_rewrite_rules( FALSE );
 	}
 	
 	/*
@@ -50,6 +27,7 @@ class TaxoTaxi2ElecBoog{
 	
 	/*
 	*	filter for `rewrite_rules_array` to add taxonomy base slugs directly before last catch alls
+	*	calls `{slug}_taxonomytaxi-two_rewrite_rules` filters
 	*	@param array
 	*	@return array	
 	*/
@@ -69,8 +47,14 @@ class TaxoTaxi2ElecBoog{
 				
 			$slug = $properties->rewrite['slug'];
 			
-			$new_rules[ $slug.'/page/?([0-9]{1,})' ] = 'index.php?'.$taxonomy.'=show-all-terms&paged=$matches[1]';
-			$new_rules[ $slug ] = 'index.php?'.$taxonomy.'=show-all-terms';
+			$taxonomy_rules = array(
+				$slug.'/page/?([0-9]{1,})' => 'index.php?'.$taxonomy.'=show-all-terms&paged=$matches[1]',
+				$slug => 'index.php?'.$taxonomy.'=show-all-terms'
+			);
+			
+			$taxonomy_rules = apply_filters( $slug.'_taxonomytaxi-two_rewrite_rules', $taxonomy_rules );
+			
+			$new_rules = array_merge( $new_rules, $taxonomy_rules );
 		}
 		
 		// insert new rewrite rules directly before the catch alls
@@ -115,6 +99,10 @@ class TaxoTaxi2ElecBoog{
 															'taxonomy' => self::$queried_taxonomy,
 															'name' => $taxonomy->labels->all_items );
 				break;
+				
+			default:
+				//ddbug( func_get_args() );
+				break;
 		}
 		
 		return $title;
@@ -122,5 +110,3 @@ class TaxoTaxi2ElecBoog{
 }
 
 add_action( 'init', 'TaxoTaxi2ElecBoog::setup' );
-register_activation_hook( __FILE__, 'TaxoTaxi2ElecBoog::activate' );
-register_deactivation_hook( __FILE__, 'TaxoTaxi2ElecBoog::deactivate' );
